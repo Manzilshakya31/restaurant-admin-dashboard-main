@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  max-width: 1920px;
+  margin: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .heading {
+    @apply font-bold text-[#fc8739];
+  }
+  .title-1 {
+    @apply font-bold text-5xl;
+  }
+}
+
+.background-image-container {
+  background-image: url("/images/rightlogin.png");
+  background-size: cover;
+  background-position: center;
+  /* height: 832px; */
+  /* width: fit-content; */
+}
+
+.background-imagesignup-container {
+  background-image: url("/images/leftsignup.png");
+  background-size: cover;
+  background-position: center;
+  /* height: 832px; */
+  /* width: fit-content; */
+}
