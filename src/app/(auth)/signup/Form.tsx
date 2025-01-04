@@ -114,7 +114,7 @@ const Form = () => {
           </Link>
           <div className="mt-[32px] flex justify-center gap-2">
             <span>Already have an account?</span>
-            <Link href={"/user/login"} className="font-medium text-[#000000]">
+            <Link href={"/login"} className="font-medium text-[#000000]">
               Log in
             </Link>
           </div>

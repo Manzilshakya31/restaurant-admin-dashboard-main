@@ -26,7 +26,7 @@ const RightSide = () => {
             We’ve been using RBS to book table.
           </p>
           <div className="my-[32px] flex flex-col items-center justify-center">
-            <Image src="/images/Avatar.png" alt={""} height={64} width={64} />
+            <Image src="/images/user-01.png" alt={""} height={64} width={64} />
             <span className="mt-[16px] text-[16px] font-semibold text-[#101828]">
               NalZim
             </span>
@@ -34,7 +34,7 @@ const RightSide = () => {
           </div>
           <div>
             <Image
-              src="/images/Stars.svg"
+              src="/images/Stars.png"
               alt={"image of star logo"}
               width={116}
               height={20}
