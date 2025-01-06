@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@prisma/client": "^6.1.0",
     "@uploadthing/react": "^7.1.5",
     "antd": "^5.22.3",
     "apexcharts": "^3.45.2",

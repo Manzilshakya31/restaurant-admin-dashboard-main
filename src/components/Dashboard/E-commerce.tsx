@@ -7,6 +7,7 @@ import ChatCard from "../Chat/ChatCard";
 import TableOne from "../Tables/TableOne";
 import CardDataStats from "../CardDataStats";
 import TableBox from "../Tables/TableBox";
+import Exampleupload from "./Exampleupload";
 
 const MapOne = dynamic(() => import("@/components/Maps/MapOne"), {
   ssr: false,
@@ -128,6 +129,8 @@ const ECommerce: React.FC = () => {
         <ChartThree /> */}
         <TableBox />
       </div>
+
+      <Exampleupload />
     </>
   );
 };
