@@ -1,15 +1,16 @@
 import Form from "./Form";
-// import Right from './Right';
 import RightSide from "./RightSide";
 
 function Page() {
   return (
-    <div className=" w-full lg:flex items-center h-screen">
-      <div className="bg-img hidden h-full w-1/2 lg:block">
+    <div className="flex h-screen w-full flex-col-reverse lg:flex-row">
+      {/* RightSide: Visible only on larger screens */}
+      <div className="hidden h-full w-full lg:block lg:w-1/2">
         <RightSide />
       </div>
-      <div className="mt-[35px] flex w-full  items-center justify-center  md:mt-0 lg:w-1/2">
-        {/* <Right /> */}
+
+      {/* Form: Centered and responsive */}
+      <div className="flex h-full w-full items-center justify-center p-6 lg:w-1/2">
         <Form />
       </div>
     </div>

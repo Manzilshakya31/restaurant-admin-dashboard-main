@@ -7,8 +7,8 @@ import logo from "@/../../public/images/logoblack.png";
 const RightSide = () => {
   const router = useRouter();
   return (
-    <div className="h-[100vh] background-imagesignup-container">
-      <div className="py-[32px] px-[72px]">
+    <div className="background-imagesignup-container h-[100vh]">
+      <div className="px-[72px] py-[32px]">
         <span onClick={() => router.push("/")}>
           <Image
             src={logo}
@@ -21,27 +21,27 @@ const RightSide = () => {
         </span>
       </div>
       {/* logo above and below is content */}
-      <div className="flex items-center justify-center place-items-center h-[75vh]">
-        {/* <div className="flex flex-col justify-center items-center">
-          <p className="text-center text-[#101828] w-[450px] xl:w-[560px] h-[114px] font-semibold lg:text-3xl text-base leading-9">
+      <div className="flex h-[75vh] place-items-center items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
+          <p className="h-[114px] w-[450px] text-center text-base font-semibold leading-9 text-[#101828] lg:text-3xl xl:w-[560px]">
             We’ve been using RBS to book table.
           </p>
-          <div className="flex flex-col items-center justify-center my-[32px]">
-            <Image src="/images/Avatar.png" alt={""} height={64} width={64} />
-            <span className="text-[#101828] text-[16px] font-semibold mt-[16px]">
+          <div className="my-[32px] flex flex-col items-center justify-center">
+            <Image src="/images/user-01.png" alt={""} height={64} width={64} />
+            <span className="mt-[16px] text-[16px] font-semibold text-[#101828]">
               NalZim
             </span>
             <p>Software Engineer</p>
           </div>
           <div>
             <Image
-              src="/images/Stars.svg"
+              src="/images/Stars.png"
               alt={"image of star logo"}
               width={116}
               height={20}
             />
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

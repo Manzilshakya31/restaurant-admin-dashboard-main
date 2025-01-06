@@ -9,17 +9,20 @@ import Link from "next/link";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Menu from "./components/Menu";
+import { UploadButton } from "@/utils/uploadthing";
+import Image from "next/image";
 
 const FormLayout = () => {
-  const [id, setId] = useState("");
+  const [restaurant_id, setId] = useState("");
   const [table_name, setTable_name] = useState("");
-  const [status, setStatus] = useState("");
+  const [booking_status, setStatus] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
   const [table_size, setTable_size] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -28,11 +31,11 @@ const FormLayout = () => {
       const response = await axios.post(
         "http://localhost:4000/api/restaurants/add_table",
         {
-          id,
+          restaurant_id,
           table_name,
-          status,
+          booking_status: 0,
           description,
-          image,
+          image: uploadedUrl || image,
           price,
           table_size,
         },
@@ -44,11 +47,17 @@ const FormLayout = () => {
     }
   };
 
+  const saveImageToDatabase = async (imageUrl: string) => {
+    setUploadedUrl(imageUrl);
+    alert("Image uploaded successfully!");
+  };
+  console.log(uploadedUrl, "fghj");
+
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Table register" />
+      {/* <Breadcrumb pageName="Table register" /> */}
 
-      <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-9 sm:grid-cols-2" key="uniqueKey">
         <div className="flex flex-col gap-9" onSubmit={handleSubmit}>
           {/* <!-- Contact Form --> */}
           <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -62,11 +71,11 @@ const FormLayout = () => {
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                   <div className="w-full xl:w-1/2">
                     <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                      Id
+                      Restaurant Id
                     </label>
                     <input
                       type="text"
-                      value={id}
+                      value={restaurant_id}
                       onChange={(e) => setId(e.target.value)}
                       placeholder="Enter your unique id"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -86,30 +95,33 @@ const FormLayout = () => {
                     />
                   </div>
                 </div>
+                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                  <div className="w-full xl:w-1/2">
+                    <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+                      Table size
+                    </label>
+                    <input
+                      type="text"
+                      value={table_size}
+                      onChange={(e) => setTable_size(e.target.value)}
+                      placeholder="Enter your unique id"
+                      className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    />
+                  </div>
 
-                {/* <div className="mb-4.5">
-                  <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                    Email <span className="text-meta-1">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    placeholder="Enter your email address"
-                    className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                  />
+                  <div className="w-full xl:w-1/2">
+                    <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+                      Price
+                    </label>
+                    <input
+                      type="text"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                      placeholder="Enter your table name / no."
+                      className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    />
+                  </div>
                 </div>
-
-                <div className="mb-4.5">
-                  <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                    Description
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Select subject"
-                    className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                  />
-                </div> */}
-
-                {/* <SelectGroupOne /> */}
 
                 <div className="mb-6">
                   <label className="mb-3 block text-sm font-medium text-black dark:text-white">
@@ -136,6 +148,48 @@ const FormLayout = () => {
                       className="w-full cursor-pointer rounded-lg border-[1.5px] border-stroke bg-transparent outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke file:bg-whiter file:px-5 file:py-3 file:hover:bg-primary file:hover:bg-opacity-10 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:file:border-form-strokedark dark:file:bg-white/30 dark:file:text-white dark:focus:border-primary"
                     />
                   </div>
+                </div>
+
+                <div className="mb-6">
+                  <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+                    Table Photo
+                  </label>
+                  <UploadButton
+                    endpoint="imageUploader"
+                    onClientUploadComplete={async (res: { url: string }[]) => {
+                      if (res && res[0]) {
+                        await saveImageToDatabase(res[0].url);
+                      }
+                    }}
+                    onUploadError={(err: any) => {
+                      console.error(err);
+                      alert("Upload failed");
+                    }}
+                  />
+                  {/* {uploadedUrl && (
+                    <div className="mt-3">
+                      <p>Uploaded Image:</p>
+                      <img
+                        src={uploadedUrl}
+                        alt="Uploaded"
+                        // style={{ width: "300px" }}
+                        width={300}
+                        height={300}
+                      />
+                    </div>
+                  )} */}
+                  {/* {uploadedUrl && (
+                    <div className="mt-3">
+                      <p>Uploaded Image:</p>
+                      <Image
+                        src={uploadedUrl}
+                        alt="Uploaded"
+                        // style={{ width: "300px" }}
+                        width={300}
+                        height={300}
+                      />
+                    </div>
+                  )} */}
                 </div>
 
                 <button
